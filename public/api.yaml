@@ -37,10 +37,10 @@ paths:
         - in: body
           schema:
             required:
-              - name
+              - phone
               - password
             properties:
-              name:
+              phone:
                 type: string
               password:
                 type: string
@@ -239,11 +239,8 @@ paths:
           in: body
           schema:
             required:
-              - customerId
               - customerTicketId
             properties:
-              customerId:
-                type: number
               customerTicketId:
                 type: number
               partnerTicketId:
