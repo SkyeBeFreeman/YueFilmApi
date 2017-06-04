@@ -116,7 +116,7 @@ paths:
           schema:
             type: string
 
-  /movie/{cinemaId}:
+  /movie/cinema/{cinemaId}:
     get: 
       summary: 根据影院获取所有播放的电影的简略信息
       parameters:
@@ -312,7 +312,7 @@ definitions:
       password:
         type: string
       gender:
-        type: boolean
+        type: bool
       phone:
         type: string
   
@@ -321,7 +321,7 @@ definitions:
       username:
         type: string
       gender:
-        type: boolean
+        type: bool
       phone:
         type: string
 
@@ -334,7 +334,7 @@ definitions:
       address:
         type: string
       rank:
-        type: number
+        type: float
 
   Movie:
     properties:
@@ -353,7 +353,7 @@ definitions:
       introduction:
         type: string
       rank:
-        type: number
+        type: float
       post:
         type: string
       likes:
@@ -366,7 +366,7 @@ definitions:
       nameCh:
         type: string
       rank:
-        type: number
+        type: float
       post:
         type: string
       likes:
@@ -387,7 +387,7 @@ definitions:
       endTime:
         type: string
       price:
-        type: number
+        type: float
       tickets:
         type: array
         items:
@@ -408,7 +408,7 @@ definitions:
       endTime:
         type: string
       price:
-        type: number
+        type: float
 
   Ticket:
     properties:
