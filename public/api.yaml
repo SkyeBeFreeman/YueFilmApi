@@ -23,12 +23,10 @@ paths:
           description: 注册成功
           schema:
             $ref: "#/definitions/UserInShort"
-        401:
-          # 手机号输入有误
-          # 手机号已被注册
+        406:
           description: 注册失败
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            type: string
 
   /user/login:
     post: 
@@ -50,11 +48,9 @@ paths:
           schema:
             $ref: "#/definitions/UserInShort"
         401:
-          # 账号不存在
-          # 密码输入有误 
           description: 登录失败
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            type: string
   
   /user/userinfo:
     get: 
@@ -65,10 +61,9 @@ paths:
           schema:
             $ref: "#/definitions/UserInShort"
         404:
-          # 用户不存在
-          description: 信息未找到
+          description: 用户不存在
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            type: string
 
   /cinema/hotcinemas:
     get: 
@@ -96,10 +91,9 @@ paths:
           schema:
             $ref: "#/definitions/Movie"
         404:
-          # 电影不存在
-          description: 信息未找到
+          description: 电影不存在
           schema:
-            $ref: "#/definitions/ErrorResponse"  
+            type: string  
   
   /movie/hotmovies/{movieIndex}:
     get: 
@@ -118,10 +112,9 @@ paths:
             items:
               $ref: "#/definitions/MovieInShort"
         404:
-          # 电影不存在
-          description: 信息未找到
+          description: 电影不存在
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            type: string
 
   /movie/{cinemaId}:
     get: 
@@ -139,10 +132,9 @@ paths:
             items:
               $ref: "#/definitions/MovieInShort"
         404:
-          # 电影院不存在
-          description: 信息未找到
+          description: 电影院不存在
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            type: string
 
   /movie/{movieId}:
     get: 
@@ -158,10 +150,9 @@ paths:
           schema:
             $ref: "#/definitions/Movie"
         404:
-          # 电影不存在
-          description: 信息未找到
+          description: 电影不存在
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            type: string
 
   /schedule/scheduleinfo:
     post: 
@@ -183,11 +174,9 @@ paths:
           schema:
             $ref: "#/definitions/ScheduleInShort"
         404:
-          # 电影院不存在
-          # 电影不存在
-          description: 信息未找到
+          description: 电影院不存在/电影院不存在
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            type: string
 
   /schedule/{scheduleId}:
     get: 
@@ -203,10 +192,9 @@ paths:
           schema:
             $ref: "#/definitions/Schedule"
         404:
-          # 档期不存在
-          description: 信息未找到
+          description: 档期不存在
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            type: string
   
   /ticket/buy/{ticketId}:
     get:
@@ -219,17 +207,18 @@ paths:
       responses:
         204:
           description: 购买成功
+        401:
+          description: 用户未登录
+          schema:
+            type: string
         403:
-          # 电影票已被他人购买
           description: 购买失败
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            type: string
         404:
-          # 用户不存在
-          # 电影票不存在
-          description: 信息未找到
+          description: 用户不存在/电影票不存在
           schema:
-            $ref: "#/definitions/ErrorResponse"  
+            type: string  
 
   /order/create:
     post: 
@@ -253,11 +242,9 @@ paths:
           schema:
             $ref: "#/definitions/Order"
         404:
-          # 用户不存在
-          # 电影票不存在
-          description: 信息未找到
+          description: 用户不存在/电影票不存在
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            type: string
   
   /order/participate/{orderId}:
     get: 
@@ -273,16 +260,13 @@ paths:
           schema:
             $ref: "#/definitions/Order"
         403:
-          # 订单已超时
-          description: 申请创建失败
+          description: 申请创建失败(订单已超时)
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            type: string
         404:
-          # 订单不存在
-          # 用户不存在
-          description: 信息未找到
+          description: 订单不存在/用户不存在
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            type: string
 
   /order/cancel/{orderId}:
     get: 
@@ -296,16 +280,13 @@ paths:
         204:
           description: 取消成功
         401:
-          # 该用户不是订单参与者
-          description: 取消失败
+          description: 取消失败(该用户不是订单参与者)
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            type: string
         404:
-          # 订单不存在
-          # 用户不存在
-          description: 信息未找到
+          description: 订单不存在/用户不存在
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            type: string
 
   /order/allorder/:
     get: 
@@ -318,10 +299,9 @@ paths:
             items:
               $ref: "#/definitions/Order"
         404:
-          # 用户不存在
-          description: 信息未找到
+          description: 用户不存在
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            type: string
 
 definitions:
 
@@ -332,7 +312,7 @@ definitions:
       password:
         type: string
       gender:
-        type: bool
+        type: boolean
       phone:
         type: string
   
@@ -341,7 +321,7 @@ definitions:
       username:
         type: string
       gender:
-        type: bool
+        type: boolean
       phone:
         type: string
 
@@ -354,7 +334,7 @@ definitions:
       address:
         type: string
       rank:
-        type: float
+        type: number
 
   Movie:
     properties:
@@ -373,7 +353,7 @@ definitions:
       introduction:
         type: string
       rank:
-        type: float
+        type: number
       post:
         type: string
       likes:
@@ -386,7 +366,7 @@ definitions:
       nameCh:
         type: string
       rank:
-        type: float
+        type: number
       post:
         type: string
       likes:
@@ -407,7 +387,7 @@ definitions:
       endTime:
         type: string
       price:
-        type: float
+        type: number
       tickets:
         type: array
         items:
@@ -428,7 +408,7 @@ definitions:
       endTime:
         type: string
       price:
-        type: float
+        type: number
 
   Ticket:
     properties:
@@ -455,10 +435,3 @@ definitions:
         type: number
       partnerTicketId:
         type: number     
-
-  ErrorResponse:
-    properties:
-      code:
-        type: number
-      message:
-        type: string
