@@ -6,7 +6,7 @@ info:
 
 schemes:
   - http
-host: localhost:48403
+host: 119.29.163.132:48403
 basePath: /
 
 paths:
