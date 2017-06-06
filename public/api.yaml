@@ -172,7 +172,9 @@ paths:
         200:
           description: 成功获取所有档期的简略信息
           schema:
-            $ref: "#/definitions/ScheduleInShort"
+            type: array
+            items:
+              $ref: "#/definitions/ScheduleForm"
         404:
           description: 电影院不存在/电影院不存在
           schema:
@@ -190,7 +192,7 @@ paths:
         200:
           description: 成功获取当前档期（电影、影厅）具体信息
           schema:
-            $ref: "#/definitions/Schedule"
+            $ref: "#/definitions/ScheduleTotal"
         404:
           description: 档期不存在
           schema:
@@ -376,7 +378,7 @@ definitions:
       likes:
         type: number
 
-  Schedule:
+  ScheduleTotal:
     properties:
       scheduleId:
         type: number
@@ -391,13 +393,13 @@ definitions:
       endTime:
         type: string
       price:
-        type: float
+        type: number
       tickets:
         type: array
         items:
           $ref: "#/definitions/Ticket" 
 
-  ScheduleInShort:
+  ScheduleForm:
     properties:
       scheduleId:
         type: number
@@ -412,7 +414,7 @@ definitions:
       endTime:
         type: string
       price:
-        type: float
+        type: number
 
   Ticket:
     properties:
